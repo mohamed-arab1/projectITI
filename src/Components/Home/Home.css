@@ -1,0 +1,19 @@
+#intro {
+    background-image: url(../images/OIP\ \(1\).jpeg);
+    height: 100vh;
+  }
+
+  /* Height for devices larger than 576px */
+  /* @media (min-width: 992px) {
+    #intro {
+      margin-top: -58.59px;
+    }
+  } */
+
+  .navbar .nav-link {
+    color: #fff !important;
+  }
+
+  .text-white {
+    top: 20%;
+  }
