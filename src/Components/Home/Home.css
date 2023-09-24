@@ -1,6 +1,8 @@
 #intro {
     background-image: url(../images/OIP\ \(1\).jpeg);
     height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   /* Height for devices larger than 576px */

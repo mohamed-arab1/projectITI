@@ -1,10 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from "react";
 import "./TvShow.css";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { AiOutlineStar, AiTwotoneStar } from 'react-icons/ai'
 import Form from "react-bootstrap/Form";
+import addToFavorite from './../../store/actions';
 
 function TvShow() {
+
   const api = "d49eccadf09a51451f7a86f2da66b0c7";
   const imagePath = "https://image.tmdb.org/t/p/w500";
   const [alltvs, setAllTvs] = useState([]);
@@ -12,6 +16,9 @@ function TvShow() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState([]);
   let totalPages;
+  const myFavorite = useSelector(state => state.favorite);
+  const myDispatcher = useDispatch()
+
   useEffect(() => {
     axios
       .get(`https://api.themoviedb.org/3/movie/popular?`, {
@@ -46,8 +53,40 @@ function TvShow() {
     }
   }, [lang, page, search]);
 
+// create a function to add a favorite movie
+  const addMovie = (movie) => {
+
+    //check myFavorite not empty
+    if(myFavorite.length !== 0){
+
+      const findId = myFavorite.find(mov => mov.id === movie.id);
+      //check the movie exists to remove it
+      if(findId) {
+
+         const myFilter = myFavorite.filter(mov => mov.id !== movie.id)
+         myDispatcher(addToFavorite([...myFilter]))
+
+      } else {
+
+        //add a favorite movie
+        myFavorite.push(movie)
+        myDispatcher(addToFavorite([...myFavorite]))
+
+      }
+
+    } else {
+        //add a favorite movie
+      myFavorite.push(movie)
+      myDispatcher(addToFavorite([...myFavorite]))
+
+    }
+    console.log(myFavorite)
+  }
+
+
+
   const changLang = () => {
-    setLang(lang == "en-US" ? "ar-SA" : "en-US");
+    setLang(lang === "en-US" ? "ar-SA" : "en-US");
   };
   const showNext = () => {
     let currentPage = page;
@@ -61,19 +100,21 @@ function TvShow() {
       setPage(currentPage);
     }
   };
-  const searchMovie = (e) => {
-    e.preventDefault();
-    setSearch({ ...search });
-    console.log("====================================");
-    console.log(search);
-    console.log("====================================");
-  };
+
+  const isFavorite = (movie) => {
+    movie.isFavorite = true
+  }
+  const notFavorite = (movie) => {
+    movie.isFavorite = false
+  }
+
+
   return (
     <>
       <div className="container mt-5">
         <button className="btn btn-success float-end" onClick={changLang}>
           {" "}
-          {lang == "en-US" ? "English" : "Arabic"}{" "}
+          {lang === "en-US" ? "English" : "Arabic"}{" "}
         </button>
 
         <div class="row justify-content-center">
@@ -133,7 +174,32 @@ function TvShow() {
                 </h5>
                 <span className="movie_info">{tv.release_date}</span>
                 <span className="movie_info float-right">
-                  <i className="fas fa-star"></i> {tv.vote_average}/10
+                  {tv.vote_average}/10
+                  <i className="fas fa-star">
+                  {
+                    tv.isFavorite 
+                      ?       
+                      <AiTwotoneStar
+                        className=' text-yellow-300 cursor-pointer text-xl' 
+                        onClick={
+                        () =>{ 
+                          addMovie(tv)
+                          notFavorite(tv)
+                        }
+                      } 
+                    /> 
+                    : 
+                      <AiOutlineStar
+                        className=' text-yellow-300 cursor-pointer text-xl' 
+                        onClick={
+                          () =>{ 
+                            addMovie(tv)
+                            isFavorite(tv)
+                          }
+                        } 
+                      />
+                  }
+                  </i> 
                 </span>
                 <Link to={`/tvdetails/${tv.id}`} className="btn btn-success">
                   See Movie Details
@@ -142,7 +208,6 @@ function TvShow() {
               </div>
             </div>
           ))}
-          ;
         </div>
       </div>
       <ul className="pagination justify-content-end">
@@ -151,7 +216,7 @@ function TvShow() {
             className="btn btn-primary"
             aria-label="Previous"
             onClick={showPrev}
-            disabled={page == 1 ? true : false}
+            disabled={page === 1 ? true : false}
           >
             <span className="sr-only">Previous</span>
           </button>
@@ -161,7 +226,7 @@ function TvShow() {
             className="btn btn-primary"
             aria-label="Next"
             onClick={showNext}
-            disabled={page == totalPages ? true : false}
+            disabled={page === totalPages ? true : false}
           >
             <span className="sr-only">Next</span>
           </button>

@@ -28,10 +28,13 @@ img {
 }
 .movie_info{
     color: #5e5c5c;
+    margin-left: 0.5rem;
 }
 
 .movie_info i{
-    font-size: 20px;
+    font-size: 25px;
+    color: yellow;
+    cursor: pointer;
 }
 .card-title{
     width: 80%;
