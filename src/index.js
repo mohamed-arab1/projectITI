@@ -8,17 +8,23 @@ import TvShow from "./Components/TvShow/TvShow";
 import TvDetails from "./Components/TvDetails/TvDetails";
 import Header from "./Components/Header/Header";
 import Home from "./Components/Home/Home";
+import { Provider } from "react-redux";
+import store from './store/store';
+import Favorite from "./Components/Favorite/Favorite";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+  <Provider store={store}>
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/tv" element={<TvShow />} />
+      <Route path="/myfavorite" element={<Favorite />} />
       <Route path="/tvdetails/:id" element={<TvDetails />} />
     </Routes>
     <App />
+    </Provider>
   </BrowserRouter>
 );
 

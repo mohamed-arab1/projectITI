@@ -21,7 +21,7 @@ function TvDetails() {
         setTv(response.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   return (
     <>
