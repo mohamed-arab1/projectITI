@@ -11,7 +11,7 @@ function TvDetails() {
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/${id}`, {
+      .get(`https://api.themoviedb.org/3/tv/${id}`, {
         params: {
           api_key: api,
         },

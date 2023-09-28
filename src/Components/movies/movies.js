@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from "react";
-import "./TvShow.css";
+import "./movies.css";
 import { Link } from "react-router-dom";
 import { AiOutlineStar, AiTwotoneStar } from 'react-icons/ai'
 import Form from "react-bootstrap/Form";
@@ -9,7 +9,7 @@ import addToFavorite from './../../store/actions';
 
 function TvShow() {
 
-  const api = "d49eccadf09a51451f7a86f2da66b0c7";
+  const api = "15d093f2bcf204774cfc2b8a57975145";
   const imagePath = "https://image.tmdb.org/t/p/w500";
   const [alltvs, setAllTvs] = useState([]);
   const [lang, setLang] = useState(["en-US"]);
@@ -21,12 +21,13 @@ function TvShow() {
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/discover/tv`, {
+      .get(`https://api.themoviedb.org/3/movie/popular?`, {
         params: {
           api_key: api,
           language: lang,
           page: page,
           with_origin_country: "EG",
+
           // search: search,
         },
       })
@@ -171,7 +172,7 @@ function TvShow() {
               />
               <div className="card-body">
                 <h5 className="card-title" style={{ fontWeight: "bold" }}>
-                  {tv.name}
+                  {tv.title}
                 </h5>
                 <span className="movie_info">{tv.release_date}</span>
                 <span className="movie_info float-right">
@@ -202,7 +203,7 @@ function TvShow() {
                   }
                   </i> 
                 </span>
-                <Link to={`/tvdetails/${tv.id}`} className="btn btn-success">
+                <Link to={`/moviedeatails/${tv.id}`} className="btn btn-success">
                   See Movie Details
                 </Link>
                 {/* <Link to={`/TvDetails/${tv.id}`}>See ?details</Link> */}

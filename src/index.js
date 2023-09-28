@@ -11,6 +11,8 @@ import Home from "./Components/Home/Home";
 import { Provider } from "react-redux";
 import store from './store/store';
 import Favorite from "./Components/Favorite/Favorite";
+import Movies from "./Components/movies/movies";
+import MoviesDetails from "./Components/moviedetails/moviedeatails";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,10 +22,13 @@ root.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/tv" element={<TvShow />} />
+      <Route path="/movie" element={<Movies />} />
       <Route path="/myfavorite" element={<Favorite />} />
       <Route path="/tvdetails/:id" element={<TvDetails />} />
+      <Route path="/moviedeatails/:id" element={<MoviesDetails />} />
     </Routes>
-    <App />
+   
+    <App /> 
     </Provider>
   </BrowserRouter>
 );
