@@ -17,6 +17,9 @@ const Header = () => {
           <NavLink to={"/tv"} className={"nav-link"}>
             TvShow
           </NavLink>
+          <NavLink to={"/movie"} className={"nav-link"}>
+            Movies
+          </NavLink>
           <NavLink to={"/myfavorite"} className={"nav-link"}>
             My Favorite
           </NavLink>
