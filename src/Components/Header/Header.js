@@ -1,17 +1,24 @@
-import React from "react";
-
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
-
+import { useLocation  } from "react-router-dom";
+import { useState , useEffect } from "react";
+import "./Header.css"
 const Header = () => {
+  const [Url, setUrl] = useState("")
+  let location = useLocation();
+  useEffect(() => {
+    setUrl(location.pathname)
+    
+  }, [location])
+  
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
+    <Navbar className={Url==="/"? "hidden" : "disabled"} bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand>Navbar</Navbar.Brand>
         <Nav className="me-auto">
-          <NavLink to={"/"} className={"nav-link"}>
+          <NavLink to={"/home"} className={"nav-link"}>
             Home
           </NavLink>
           <NavLink to={"/tv"} className={"nav-link"}>

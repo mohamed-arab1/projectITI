@@ -13,6 +13,7 @@ import store from './store/store';
 import Favorite from "./Components/Favorite/Favorite";
 import Movies from "./Components/movies/movies";
 import MoviesDetails from "./Components/moviedetails/moviedeatails";
+import Login from './Components/Login/Login';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,7 +21,8 @@ root.render(
   <Provider store={store}>
     <Header />
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/tv" element={<TvShow />} />
       <Route path="/movie" element={<Movies />} />
       <Route path="/myfavorite" element={<Favorite />} />

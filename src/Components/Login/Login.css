@@ -1,0 +1,37 @@
+h1{
+    text-align: center;
+    font-weight: bold;
+    margin: 100px 0;
+}
+
+.form{
+    width: 70%;
+    margin: 20px auto;
+}
+
+.label{
+    margin-bottom: 20px;
+    font-weight: 500;
+    padding:5px 10px;
+    border-left: 4px solid black;
+}
+
+.input{
+    margin-bottom: 50px;
+    border: 1px solid black;
+}
+
+.button{
+    font-weight: bold;
+    background-color: transparent;
+    color: black;
+    outline: none;
+    border: 2px solid black;
+    padding: 5px 40px;
+}
+
+.button:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
